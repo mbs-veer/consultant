@@ -74,21 +74,31 @@
 
     /* ---------- Logo ---------- */
     .logo {
-      font-family: "Fugaz One", sans-serif;
+      font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
       font-size: 3.5rem;
       font-weight: 700;
-      background: linear-gradient(
-        90deg,
-        #22d3ee,
-        #60a5fa,
-        #a78bfa,
-        #f472b6,
-        #fb7185
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+     background: linear-gradient(
+  90deg,
+  #fff5e1,
+  #ffcc80,
+  #ff8f00,
+  #e65100,
+  #6d1b00
+);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-size: 300% 300%;
+animation: fireFlow 3s ease-in-out infinite;
+
       margin-bottom: 0.8rem;
     }
+@keyframes fireFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
     .tagline {
       color: var(--muted);
@@ -175,5 +185,6 @@
 
 </body>
 </html>
+
 
 
