@@ -1,190 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>mbs.veer | Rolling Mill Consultant</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<title>mbs.veer – Knowledge Notes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-  <style>
-    /* ---------- Theme Variables ---------- */
-    :root {
-      --bg: #0f172a;
-      --panel: #020617;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --border: rgba(148,163,184,.15);
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap" rel="stylesheet">
 
-    body.light {
-      --bg: #f8fafc;
-      --panel: #ffffff;
-      --text: #0f172a;
-      --muted: #475569;
-      --border: #e5e7eb;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      transition: background .3s, color .3s, border .3s;
-    }
-
-    body {
-      font-family: "Inter", system-ui, sans-serif;
-      background: radial-gradient(circle at top, var(--panel), var(--bg));
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    .container {
-      max-width: 720px;
-      text-align: center;
-      position: relative;
-    }
-
-    /* ---------- Toggle ---------- */
-    .toggle {
-      position: absolute;
-      top: -60px;
-      right: 0;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .toggle:hover {
-      color: var(--text);
-    }
-
-    /* ---------- Logo ---------- */
-    .logo {
-      font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: italic;
-      font-size: 3.5rem;
-      font-weight: 700;
-     background: linear-gradient(
-  90deg,
-  #fff5e1,
-  #ffcc80,
-  #ff8f00,
-  #e65100,
-  #6d1b00
-);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-size: 300% 300%;
-animation: fireFlow 3s ease-in-out infinite;
-
-      margin-bottom: 0.8rem;
-    }
-@keyframes fireFlow {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+<style>
+:root{
+  --bg:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --border:#e5e7eb;
 }
 
-    .tagline {
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
+body.dark{
+  --bg:#0f172a;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --border:#1e293b;
+}
 
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 2rem;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    .card h2 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .card p {
-      line-height: 1.7;
-    }
+body{
+  font-family:Inter,system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:background .3s,color .3s;
+}
 
-    footer {
-      margin-top: 2.5rem;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
+/* ---------- Header ---------- */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:10;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
 
-    @media (max-width: 600px) {
-      .logo {
-        font-size: 2.6rem;
-      }
-      .toggle {
-        top: -50px;
-      }
-    }
-  </style>
+body.dark header{
+  background:rgba(15,23,42,.85);
+}
+
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:1.2rem 1.5rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:1.3rem;
+  font-weight:700;
+}
+
+.toggle{
+  font-size:.85rem;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--muted);
+  padding:6px 12px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* ---------- Sections ---------- */
+section{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:0 1.5rem;
+}
+
+/* ---------- Intro ---------- */
+.hero h1{
+  font: size 100px;
+  line-height:1.1;
+  font-weight:700;
+  margin-bottom:1.2rem;
+}
+
+.hero p{
+  font-size:1.1rem;
+  color:var(--muted);
+  max-width:720px;
+}
+
+/* ---------- Knowledge Blocks ---------- */
+.editorial{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+}
+
+.editorial h2{
+  font-size:2rem;
+}
+
+.editorial p{
+  font-size:1.02rem;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+/* ---------- Divider ---------- */
+.divider{
+  border-top:1px solid var(--border);
+}
+
+/* ---------- Footer ---------- */
+footer{
+  padding:2rem 1.5rem;
+  text-align:center;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+}
+
+/* ---------- Mobile ---------- */
+@media(max-width:900px){
+  .editorial{
+    grid-template-columns:1fr;
+    gap:2rem;
+  }
+}.serif{
+  font-family: "Source Serif 4", serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+</style>
 </head>
 
-<body>
+<body class="dark">
 
+<header>
+  <div class="header-inner">
+    <div class="logo">mbs.veer</div>
+    <button class="toggle" id="themeToggle">🌙</button>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="hero">
   <div class="container">
-
-    <button class="toggle" id="themeToggle">🌙 Dark</button>
-
-    <div class="logo">MBS Veer</div>
-    <div class="tagline">Rolling Mill Consultant</div>
-
-    <div class="card">
-      <h2>About Me</h2>
-      <p>
-        I am a rolling mill engineer and consultant specializing in rebar
-        and wire rod mills. My work covers mill layout, pass design,
-        roller tables, drives, cooling systems, and production
-        optimization—delivering practical, reliable, and
-        performance-focused solutions for steel plants.
-      </p>
-    </div>
-
-    <footer>
-      © 2025 mbs.veer
-    </footer>
+    <h1>
+      Practical Notes on <br>Rolling Mill Engineering
+    </h1>
+    <p class="serif">
+  This site is a collection of short, practical write-ups on mill layout, pass design,
+  roller tables, drives, cooling systems, and common production issues.
+</p>
 
   </div>
+</section>
 
-  <script>
-    const body = document.body;
-    const toggle = document.getElementById("themeToggle");
 
-    // Load saved theme
-    if (localStorage.getItem("theme") === "light") {
-      body.classList.add("light");
-      toggle.textContent = "☀️ Light";
-    }
 
-    toggle.addEventListener("click", () => {
-      body.classList.toggle("light");
-      const isLight = body.classList.contains("light");
+<!-- SECTION 3 -->
 
-      toggle.textContent = isLight ? "☀️ Light" : "🌙 Dark";
-      localStorage.setItem("theme", isLight ? "light" : "dark");
-    });
-  </script>
+
+<footer>
+  © 2025 mbs.veer
+</footer>
+
+<script>
+const body = document.body;
+const toggle = document.getElementById("themeToggle");
+
+toggle.addEventListener("click",()=>{
+  body.classList.toggle("dark");
+  toggle.textContent =
+    body.classList.contains("dark") ? "🌙" : "☀️";
+});
+</script>
 
 </body>
 </html>
-
-
-
