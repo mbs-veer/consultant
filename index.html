@@ -16,17 +16,14 @@
   --border:#e5e7eb;
 }
 
-body.dark{
-  --bg:#0f172a;
-  --text:#e5e7eb;
-  --muted:#94a3b8;
-  --border:#1e293b;
-}
-
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
+}
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
 
 html{
@@ -46,21 +43,19 @@ header{
   top:0;
   width:100%;
   z-index:10;
-  background:rgba(255,255,255,.85);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--border);
+  background:transparent;
+ 
+ color: white;
 }
 
-body.dark header{
-  background:rgba(15,23,42,.85);
-}
+
 
 .header-inner{
   max-width:1100px;
   margin:auto;
   padding:1.2rem 1.5rem;
   display:flex;
-  justify-content:space-between;
+  justify-content:center;
   align-items:center;
 }
 
@@ -69,22 +64,13 @@ body.dark header{
   font-weight:900;
 }
 
-.toggle{
-  font-size:.85rem;
-  border:1px solid var(--border);
-  background:transparent;
-  color:var(--muted);
-  padding:6px 12px;
-  border-radius:20px;
-  cursor:pointer;
+
+section{
+  height: calc(100vh - 72px); /* header height */
+  display: flex;
+  align-items: center;
 }
 
-/* ---------- Sections ---------- */
-section{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-}
 
 .container{
   max-width:1100px;
@@ -92,36 +78,8 @@ section{
   padding:0 1.5rem;
 }
 
-/* ---------- Intro ---------- */
-.hero h1{
-  font: size 100px;
-  line-height:1.1;
-  font-weight:700;
-  margin-bottom:1.2rem;
-}
 
-.hero p{
-  font-size:1.1rem;
-  color:var(--muted);
-  max-width:720px;
-}
 
-/* ---------- Knowledge Blocks ---------- */
-.editorial{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:4rem;
-}
-
-.editorial h2{
-  font-size:2rem;
-}
-
-.editorial p{
-  font-size:1.02rem;
-  line-height:1.8;
-  color:var(--muted);
-}
 
 /* ---------- Divider ---------- */
 .divider{
@@ -129,12 +87,10 @@ section{
 }
 
 /* ---------- Footer ---------- */
-footer{
-  padding:2rem 1.5rem;
-  text-align:center;
-  color:var(--muted);
-  border-top:1px solid var(--border);
+footer {
+  display: none;
 }
+
 
 /* ---------- Mobile ---------- */
 @media(max-width:900px){
@@ -142,58 +98,274 @@ footer{
     grid-template-columns:1fr;
     gap:2rem;
   }
-}.serif{
-  font-family: "Source Serif 4", serif;
-  font-size: 1.1rem;
-  line-height: 1.8;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Great+Vibes&display=swap');
+
+.quote-hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: white;
+  color: black;
+  padding: 2rem;
+}
+
+.quote-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900; /* Extra bold */
+  font-size: clamp(3rem, 6vw, 6rem); /* Responsive big font */
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.quote-signature {
+  
+  font-family: serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: 0.5rem;
+  color: #ffd700; /* optional golden highlight */
+}
+
+
+
+
+
+
+.quote-hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+
+  /* Diagonal split */
+  background: linear-gradient(135deg, black 50%, white 50%);
+  color: white; /* Default text color for dark side */
+}
+
+.quote-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, white 50%, black 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.quote-signature {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: 0.5rem;
+  color: #ffd700;
+}
+
+
+.quote-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.half {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 150%;
+  transform-origin: top left;
+}
+
+
+
+
+
+.newyear-text {
+  position: relative;
+  z-index: 2;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.newyear-sub {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 500;
+  color: #ffd700;
+}
+
+/* Confetti canvas */
+#confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.newyear-text
+ {
+  color: white;
+  mix-blend-mode: difference;
+}
+.sparkle {
+  display: inline-block;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+.sparkle svg {
+  fill: gold;
+  filter: drop-shadow(0 0 6px rgba(255,215,0,0.6));
+  animation: sparklePulse 2.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Subtle luxury animation */
+@keyframes sparklePulse {
+  0% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) rotate(90deg);
+    opacity: 0.6;
+  }
+}
+@media (max-width: 768px) {
+  .newyear-text {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+  }
+
+  .year {
+    display: block;          /* Move to next line */
+    font-size: 1.6em;        /* Make 2026 bigger */
+    margin-top: 0.3rem;
+    letter-spacing: 0.05em;
+  }
 }
 
 </style>
 </head>
 
-<body class="dark">
+<body>
 
 <header>
   <div class="header-inner">
-    <div class="logo">mbs.veer</div>
-    <button class="toggle" id="themeToggle">🌙</button>
+    <div class="logo">MBS &starf; VEER</div>
+    
   </div>
 </header>
 
-<!-- INTRO -->
-<section class="hero">
-  <div class="container">
-    <h1>
-      Practical Notes on <br>Rolling Mill Engineering
-    </h1>
-    <p class="serif">
-  This site is a collection of short, practical write-ups on mill layout, pass design,
-  roller tables, drives, cooling systems, and common production issues.
-</p>
+<section class="quote-hero">
 
+
+  <div class="newyear-text">
+    Happy New Year<span class="year">2026</span>
   </div>
+  <div class="newyear-sub">
+  Wishing prosperity, curiosity & progress
+  <span class="sparkle">
+    <svg viewBox="0 0 100 100" width="26" height="26" aria-hidden="true">
+      <polygon points="50,0 62,38 100,50 62,62 50,100 38,62 0,50 38,38"/>
+    </svg>
+  </span>
+</div>
+
+
+  <canvas id="confetti"></canvas>
 </section>
 
 
 
-<!-- SECTION 3 -->
 
 
 <footer>
   © 2025 mbs.veer
 </footer>
 
-<script>
-const body = document.body;
-const toggle = document.getElementById("themeToggle");
 
-toggle.addEventListener("click",()=>{
-  body.classList.toggle("dark");
-  toggle.textContent =
-    body.classList.contains("dark") ? "🌙" : "☀️";
-});
+
+
+<script>
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const colors = ['#ff3b3b','#ffd700','#00e5ff','#7cff00','#ff6aff'];
+const confetti = [];
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height - canvas.height;
+    this.size = Math.random() * 6 + 3;
+    this.speed = Math.random() * 3 + 2;
+    this.rotation = Math.random() * 360;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  update() {
+    this.y += this.speed;
+    this.rotation += this.speed;
+    if (this.y > canvas.height) {
+      this.y = -10;
+      this.x = Math.random() * canvas.width;
+    }
+  }
+
+  draw() {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation * Math.PI / 180);
+    ctx.fillStyle = this.color;
+    ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size*1.5);
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < 120; i++) {
+  confetti.push(new Particle());
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  confetti.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
 </script>
 
 </body>
 </html>
-
