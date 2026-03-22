@@ -1,374 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>mbs.veer – Knowledge Notes</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Simple Diary</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      
+    }
 
-<style>
-:root{
-  --bg:#ffffff;
-  --text:#111827;
-  --muted:#6b7280;
-  --border:#e5e7eb;
-}
+    .overlay {
+      background: #f5f5f7;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-html, body {
-  height: 100%;
-  overflow: hidden;
-}
+    .diary {
+      width: 700px;
+      max-width: 95%;
+    }
 
-html{
-  scroll-behavior:smooth;
-}
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: normal;
+    }
 
-body{
-  font-family:Inter,system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:background .3s,color .3s;
-}
+    .entry {
+      padding: 15px 0;
+      line-height: 1.6;
+    }
 
-/* ---------- Header ---------- */
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:10;
-  background:transparent;
- 
- color: white;
-}
+    .date {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
 
+    /* Thin line between entries */
+    .entry + .entry {
+      border-top: 1px solid #1f1f21;
+    }
 
-
-.header-inner{
-  max-width:1100px;
-  margin:auto;
-  padding:1.2rem 1.5rem;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.logo{
-  font-size:1.3rem;
-  font-weight:900;
-}
-
-
-section{
-  height: calc(100vh - 72px); /* header height */
+    .loader {
+      text-align: center;
+      padding: 20px;
+      color: gray;
+      display: none;
+    }
+/* Container - Clean, left-aligned or centered, spacious */
+.blog-title {
+  text-align: left; /* GatesNotes often aligns left or center-left */
+  margin: 60px 0 20px 0;
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #535353; /* Subtle editorial line */
+  padding-bottom: 10px;
+  max-width: fit-content;
 }
 
-
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:0 1.5rem;
-}
-
-
-
-
-/* ---------- Divider ---------- */
-.divider{
-  border-top:1px solid var(--border);
-}
-
-/* ---------- Footer ---------- */
-footer {
-  display: none;
-}
-
-
-/* ---------- Mobile ---------- */
-@media(max-width:900px){
-  .editorial{
-    grid-template-columns:1fr;
-    gap:2rem;
-  }
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Great+Vibes&display=swap');
-
-.quote-hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: white;
-  color: black;
-  padding: 2rem;
-}
-
-.quote-text {
-  font-family: 'Inter', sans-serif;
-  font-weight: 900; /* Extra bold */
-  font-size: clamp(3rem, 6vw, 6rem); /* Responsive big font */
-  line-height: 1.1;
-  margin-bottom: 1rem;
-}
-
-.quote-signature {
-  
-  font-family: serif;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  margin-top: 0.5rem;
-  color: #ffd700; /* optional golden highlight */
-}
-
-
-
-
-
-
-.quote-hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 2rem;
-
-  /* Diagonal split */
-  background: linear-gradient(135deg, black 50%, white 50%);
-  color: white; /* Default text color for dark side */
-}
-
-.quote-text {
-  font-family: 'Inter', sans-serif;
-  font-weight: 900;
-  font-size: clamp(3rem, 6vw, 6rem);
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, white 50%, black 50%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.quote-signature {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  margin-top: 0.5rem;
-  color: #ffd700;
-}
-
-
-.quote-hero {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 2rem;
-  overflow: hidden;
-}
-
-.half {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 150%;
-  height: 150%;
-  transform-origin: top left;
-}
-
-
-
-
-
-.newyear-text {
-  position: relative;
-  z-index: 2;
-  font-family: 'Inter', sans-serif;
-  font-weight: 900;
-  font-size: clamp(3.5rem, 7vw, 7rem);
+/* Base style for all spans to ensure editorial consistency */
+.blog-title span {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #000;
   letter-spacing: -0.02em;
-  margin-bottom: 1rem;
-  color: white;
-  text-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  transition: color 0.2s ease;
 }
 
-.newyear-sub {
-  position: relative;
-  z-index: 2;
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  font-weight: 500;
-  color: #ffd700;
+/* "The" - Subtle and light */
+.word1 {
+  font-weight: 300;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-right: 8px;
+  color: #666 !important;
 }
 
-/* Confetti canvas */
-#confetti {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
+/* "Blog" - Bold and Authoritative */
+.word2 {
+  font-weight: 800;
+  font-size: 2.5rem;
+  margin-right: 8px;
 }
 
-.newyear-text
- {
-  color: white;
-  mix-blend-mode: difference;
-}
-.sparkle {
-  display: inline-block;
-  margin-left: 0.4rem;
-  vertical-align: middle;
-}
-
-.sparkle svg {
-  fill: gold;
-  filter: drop-shadow(0 0 6px rgba(255,215,0,0.6));
-  animation: sparklePulse 2.4s ease-in-out infinite;
-  transform-origin: center;
+/* "of" - Italic Serif (The 'Editorial' touch) */
+.word3 {
+  font-family: 'Merriweather', serif !important;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.8rem;
+  margin-right: 10px;
+  color: #333 !important;
 }
 
-/* Subtle luxury animation */
-@keyframes sparklePulse {
-  0% {
-    transform: scale(0.8) rotate(0deg);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.1) rotate(45deg);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.8) rotate(90deg);
-    opacity: 0.6;
-  }
-}
-@media (max-width: 768px) {
-  .newyear-text {
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
-  }
-
-  .year {
-    display: block;          /* Move to next line */
-    font-size: 1.6em;        /* Make 2026 bigger */
-    margin-top: 0.3rem;
-    letter-spacing: 0.05em;
-  }
+/* "Veer" - The Signature Blue */
+.word4 {
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #005596 !important; /* Classic GatesNotes Blue */
 }
 
-</style>
+/* Hover effect - Subtle color shift instead of scaling */
+.blog-title:hover .word4 {
+  color: #003d6b !important;
+}
+
+/* Import Clean Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;800&family=Merriweather:ital,wght@1,400&display=swap');
+  </style>
 </head>
 
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo">MBS &starf; VEER</div>
-    
+<div class="overlay">
+  <div class="diary">
+    <h1 class="blog-title">
+  
+  <span class="word2">mbs & veer</span>
+ 
+</h1>
+    <div id="entries"></div>
+    <div class="loader" id="loader">Loading more...</div>
   </div>
-</header>
-
-<section class="quote-hero">
-
-
-  <div class="newyear-text">
-    Happy New Year <span class="year">2026</span>
-  </div>
-  <div class="newyear-sub">
-  Wishing prosperity, curiosity & progress
-  <span class="sparkle">
-    <svg viewBox="0 0 100 100" width="26" height="26" aria-hidden="true">
-      <polygon points="50,0 62,38 100,50 62,62 50,100 38,62 0,50 38,38"/>
-    </svg>
-  </span>
 </div>
 
-
-  <canvas id="confetti"></canvas>
-</section>
-
-
-
-
-
-<footer>
-  © 2025 mbs.veer
-</footer>
-
-
-
-
 <script>
-const canvas = document.getElementById('confetti');
-const ctx = canvas.getContext('2d');
+const diaryEntries = [
+  { 
+    date: "March 22, 2026", 
+    text: `I did not know I would miss the rain this way. In my homeland Kerala, it was never something to think about. It arrived as part of the order of things, like dusk following day, like the slow swelling of rivers that had done this for centuries before us. The land knew what to do with it. So did we.<br><br><img src="sibi_1.jpg" alt="My Son playing in the stream near my aunt's home in Wayanad" style="width: 100%; height: auto;"><br><em>My Son playing in the stream near my aunt's home in Wayanad</em><br><br>
 
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', resize);
+    Here, in the Gulf, the sky remains stubbornly clear. Weeks pass, then months, and nothing falls. The earth does not expect it. There is no waiting, no scent rising in anticipation, no darkening horizon promising relief. The air is dry, almost careful, as though it has learned to live without excess.<br><br>
 
-const colors = ['#ff3b3b','#ffd700','#00e5ff','#7cff00','#ff6aff'];
-const confetti = [];
+    What I miss most is the green. In Kerala, green was not a colour but a presence. It pressed close—along roads, across fields, over water—softening everything it touched. It made distances seem shorter, life more contained. Here, the land stretches out in browns and pale yellows, open and unyielding, as if it has chosen endurance over abundance.<br><br>
 
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height - canvas.height;
-    this.size = Math.random() * 6 + 3;
-    this.speed = Math.random() * 3 + 2;
-    this.rotation = Math.random() * 360;
-    this.color = colors[Math.floor(Math.random() * colors.length)];
+    Sometimes, I think of the rain not as weather, but as a kind of inheritance. It shaped the way we moved, the way we waited, the way we understood time. A sudden downpour was never an interruption; it was part of a longer story the land was always telling. You stepped aside, watched it pass, and carried on.<br><br>
+
+    In its absence, something feels incomplete—not dramatically, but quietly, like a familiar sound that has stopped without notice. Life continues, of course. Work fills the days, the routines settle in. But somewhere beneath it all is the memory of water falling steadily, of a landscape that answered it with life.<br><br>
+
+    I realise now that I did not simply leave a place behind. I left a climate, a rhythm, a way of being shaped by rain. And here, under this unbroken sky, I find myself waiting for something that does not come.` 
   }
+];
 
-  update() {
-    this.y += this.speed;
-    this.rotation += this.speed;
-    if (this.y > canvas.height) {
-      this.y = -10;
-      this.x = Math.random() * canvas.width;
+let currentIndex = 0;
+
+function renderEntries(count = 3) {
+  const container = document.getElementById("entries");
+
+  for (let i = 0; i < count; i++) {
+    if (currentIndex >= diaryEntries.length) return;
+
+    const data = diaryEntries[currentIndex];
+
+    const entry = document.createElement("div");
+    entry.className = "entry";
+
+    entry.innerHTML = `
+      <div class="date">${data.date}</div>
+      <div>${data.text}</div>
+    `;
+
+    container.appendChild(entry);
+    currentIndex++;
+  }
+}
+
+// Initial entries
+renderEntries(5);
+
+// Infinite scroll
+window.addEventListener("scroll", () => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+    loadMore();
+  }
+});
+
+let loading = false;
+
+function loadMore() {
+  if (loading) return;
+  if (currentIndex >= diaryEntries.length) return;
+
+  loading = true;
+  document.getElementById("loader").style.display = "block";
+
+  setTimeout(() => {
+    renderEntries(2);
+    loading = false;
+
+    if (currentIndex >= diaryEntries.length) {
+      document.getElementById("loader").innerText = "End of diary";
     }
-  }
-
-  draw() {
-    ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.rotation * Math.PI / 180);
-    ctx.fillStyle = this.color;
-    ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size*1.5);
-    ctx.restore();
-  }
+  }, 600);
 }
-
-for (let i = 0; i < 120; i++) {
-  confetti.push(new Particle());
-}
-
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  confetti.forEach(p => {
-    p.update();
-    p.draw();
-  });
-  requestAnimationFrame(animate);
-}
-animate();
 </script>
 
 </body>
 </html>
-
-
-
