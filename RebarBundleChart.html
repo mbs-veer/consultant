@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rebar bundle chart</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap">
+<style>
+:root{
+  --bg:#E8ECEF;--surface:#FFFFFF;--ink:#14212A;--muted:#55656F;--line:#C9D2D8;
+  --accent:#0B5C8A;--accent-ink:#FFFFFF;--accent-soft:#A9CBE0;--field:#F3F5F7;--bar:#FFFFFF;
+  color-scheme:light;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F171C;--surface:#18232A;--ink:#E6EDF1;--muted:#93A4AF;--line:#2B3A43;
+    --accent:#5FB0E0;--accent-ink:#0B1A22;--accent-soft:#2D6384;--field:#111B21;--bar:#18232A;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F171C;--surface:#18232A;--ink:#E6EDF1;--muted:#93A4AF;--line:#2B3A43;
+  --accent:#5FB0E0;--accent-ink:#0B1A22;--accent-soft:#2D6384;--field:#111B21;--bar:#18232A;color-scheme:dark;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 Barlow,system-ui,"Segoe UI",Roboto,Arial,sans-serif;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bar);z-index:10}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:12;height:52px;display:flex;align-items:center;padding:0 16px;background:var(--bar);border-bottom:1px solid var(--line)}
+.bar h1{margin:0;font:600 19px/1.2 "Barlow Semi Condensed",Barlow,system-ui,sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px 16px 40px;display:grid;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:42px;min-width:48px;padding:0 14px;border:1px solid var(--line);border-radius:8px;background:var(--field);color:var(--ink);font:500 16px Barlow,system-ui,sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.row2{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.row2 label{color:var(--muted);font-size:14px}
+select{height:42px;padding:0 10px;font:500 16px Barlow,system-ui,sans-serif;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px}
+.link{min-height:42px;padding:0 12px;border:0;background:none;color:var(--accent);font:500 16px Barlow,system-ui,sans-serif;text-decoration:underline;cursor:pointer}
+button:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.count{margin:12px 0 0;color:var(--muted);font-size:14px}
+table{width:100%;border-collapse:collapse;table-layout:fixed;text-align:center}
+thead th{position:sticky;top:calc(env(safe-area-inset-top,0px) + 52px);z-index:11;background:var(--accent);color:var(--accent-ink);padding:0;border:0}
+thead button{width:100%;min-height:58px;padding:6px 4px;border:0;background:none;color:inherit;font:600 14px/1.2 "Barlow Semi Condensed",Barlow,system-ui,sans-serif;cursor:pointer}
+thead button small{display:block;font-weight:400;font-size:13px}
+th[aria-sort="ascending"] button::after{content:" \25B2";font-size:10px}
+th[aria-sort="descending"] button::after{content:" \25BC";font-size:10px}
+tbody td{padding:11px 4px;font:600 17px "Barlow Semi Condensed",Barlow,system-ui,sans-serif;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--line)}
+tbody tr:nth-child(odd){background:var(--surface)}
+tbody tr:nth-child(even){background:var(--field)}
+tbody tr.sel{background:var(--accent-soft)}
+tbody tr{cursor:pointer}
+.empty{padding:24px;text-align:center;color:var(--muted)}
+#detail{border-left:4px solid var(--accent);font-size:16px}
+#detail:empty{display:none}
+#detail b{font:600 19px "Barlow Semi Condensed",Barlow,system-ui,sans-serif}
+@media (min-width:520px){thead button{font-size:16px}}
+</style>
+</head>
+<body>
+<header class="bar"><h1>Rebar bundle chart</h1></header>
+<main>
+  <section class="card">
+    <div class="chips" id="chips" role="group" aria-label="Filter by rebar size"></div>
+    <div class="row2">
+      <label for="len">Length</label>
+      <select id="len"></select>
+      <button class="link" id="reset">Reset</button>
+    </div>
+    <p class="count" id="count"></p>
+  </section>
+  <section class="card" style="padding:0 0 4px">
+    <table>
+      <thead><tr id="head"></tr></thead>
+      <tbody id="body"></tbody>
+    </table>
+    <p class="empty" id="empty" hidden>No bundles match these filters.</p>
+  </section>
+  <section class="card" id="detail" aria-live="polite"></section>
+</main>
+<script>
+const D=[
+[8,12,422,0.395,2.000],[10,12,270,0.617,1.999],[12,12,188,0.888,2.003],[14,12,138,1.210,2.004],[16,12,106,1.580,2.010],
+[20,12,68,2.470,2.016],[20,11,73,2.470,1.983],[20,10,81,2.470,2.001],[20,9,90,2.470,2.001],
+[25,12,44,3.850,2.033],[25,13,41,3.850,2.052],[25,11,47,3.850,1.990],[25,10.5,49,3.850,1.981],[25,10,52,3.850,2.002],[25,9.5,54,3.850,1.975],
+[32,12,26,6.310,1.969],[32,11,28,6.310,1.943],[32,10.5,30,6.310,1.988],[32,10,31,6.310,1.956],[32,9.5,33,6.310,1.978],
+[32,9,35,6.310,1.988],[32,8.5,37,6.310,1.984],[32,8,39,6.310,1.969],[32,7,45,6.310,1.988],
+[40,12,17,9.858,2.011]
+];
+const COLS=[['Rebar Size','(MM)',0,0],['Length','(MTR)',1,1],['Bars/Bundle','',2,0],['KG/MTR','',3,3],['Theoretical Wt','(MT)',4,3]];
+const $=id=>document.getElementById(id);
+const REG=[10,12,16,20,25,32,40];
+let size=null,len='',sortC=null,sortDir=1,sel=-1,reg=true;
+const uniq=i=>[...new Set(D.map(r=>r[i]))].sort((a,b)=>a-b);
+
+$('chips').innerHTML='<button class="chip" data-s="reg" aria-pressed="true">Regular, 12 m</button>'+['All',...uniq(0)].map(s=>'<button class="chip" data-s="'+(s==='All'?'':s)+'" aria-pressed="false">'+(s==='All'?'All sizes':s+' mm')+'</button>').join('');
+$('len').innerHTML='<option value="">All</option>'+uniq(1).reverse().map(l=>'<option value="'+l+'">'+l+' m</option>').join('');
+$('head').innerHTML=COLS.map((c,i)=>'<th scope="col" data-c="'+i+'" aria-sort="none"><button>'+c[0]+(c[1]?'<small>'+c[1]+'</small>':'')+'</button></th>').join('');
+
+function draw(){
+  let rows=D.map((r,i)=>({r,i})).filter(x=>reg?(x.r[1]===12&&REG.includes(x.r[0])):((size===null||x.r[0]===size)&&(len===''||x.r[1]===+len)));
+  if(sortC!==null){const k=COLS[sortC][2];rows.sort((a,b)=>(a.r[k]-b.r[k])*sortDir||a.i-b.i);}
+  $('body').innerHTML=rows.map(x=>'<tr data-i="'+x.i+'"'+(x.i===sel?' class="sel"':'')+'>'+COLS.map(c=>'<td>'+x.r[c[2]].toFixed(c[3])+'</td>').join('')+'</tr>').join('');
+  $('empty').hidden=rows.length>0;
+  $('count').textContent='Showing '+rows.length+' of '+D.length+' bundle options';
+  document.querySelectorAll('.chip').forEach(b=>b.setAttribute('aria-pressed',String(reg?b.dataset.s==='reg':((b.dataset.s===''&&size===null)||(b.dataset.s!==''&&b.dataset.s!=='reg'&&+b.dataset.s===size)))));
+  document.querySelectorAll('#head th').forEach((th,i)=>th.setAttribute('aria-sort',i===sortC?(sortDir===1?'ascending':'descending'):'none'));
+  const d=sel>=0?D[sel]:null;
+  $('detail').innerHTML=d&&rows.some(x=>x.i===sel)?'<b>'+d[0]+' mm, '+d[1]+' m bars</b><br>'+d[2]+' bars per bundle at '+d[3].toFixed(3)+' kg/m gives '+d[4].toFixed(3)+' MT per bundle ('+(d[4]*1000).toFixed(0)+' kg).':'';
+}
+$('chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;reg=b.dataset.s==='reg';size=(b.dataset.s===''||reg)?null:+b.dataset.s;draw();});
+$('len').addEventListener('change',e=>{len=e.target.value;if(len!=='')reg=false;draw();});
+$('head').addEventListener('click',e=>{const th=e.target.closest('th');if(!th)return;const c=+th.dataset.c;if(sortC===c)sortDir=-sortDir;else{sortC=c;sortDir=1;}draw();});
+$('body').addEventListener('click',e=>{const tr=e.target.closest('tr');if(!tr)return;const i=+tr.dataset.i;sel=sel===i?-1:i;draw();});
+$('reset').addEventListener('click',()=>{reg=true;size=null;len='';$('len').value='';sortC=null;sortDir=1;sel=-1;draw();});
+draw();
+</script>
+</body>
+</html>

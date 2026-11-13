@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mill tools</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap">
+<style>
+:root{
+  --bg:#E8ECEF;--surface:#FFFFFF;--ink:#14212A;--muted:#55656F;--line:#C9D2D8;
+  --accent:#0B5C8A;--accent-ink:#FFFFFF;--field:#F3F5F7;--bar:#FFFFFF;
+  color-scheme:light;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F171C;--surface:#18232A;--ink:#E6EDF1;--muted:#93A4AF;--line:#2B3A43;
+    --accent:#5FB0E0;--accent-ink:#0B1A22;--field:#111B21;--bar:#18232A;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F171C;--surface:#18232A;--ink:#E6EDF1;--muted:#93A4AF;--line:#2B3A43;
+  --accent:#5FB0E0;--accent-ink:#0B1A22;--field:#111B21;--bar:#18232A;color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 Barlow,system-ui,"Segoe UI",Roboto,Arial,sans-serif;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bar);z-index:10}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;height:52px;display:flex;align-items:center;padding:0 16px;background:var(--bar);border-bottom:1px solid var(--line)}
+.bar h1{margin:0;font:600 19px/1.2 "Barlow Semi Condensed",Barlow,system-ui,sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px 16px 40px;display:grid;gap:12px}
+a.tool{display:block;padding:16px;background:var(--surface);color:var(--ink);text-decoration:none;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;min-height:44px}
+a.tool h2{margin:0;font:600 22px/1.2 "Barlow Semi Condensed",Barlow,system-ui,sans-serif;color:var(--accent)}
+a.tool p{margin:0;color:var(--muted)}
+a.tool:active{background:var(--field)}
+a.tool:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<header class="bar"><h1>Mill tools</h1></header>
+<main>
+  <a class="tool" href="https://claude.ai/artifact/APmM2dfmEr11Z5z9y4Yb43" target="_blank" rel="noopener">
+    <h2>Billet length calculator</h2>
+  </a>
+  <a class="tool" href="https://claude.ai/artifact/XJcgLvrmPo6DKRRTExvV3c" target="_blank" rel="noopener">
+    <h2>Rebar bundle chart</h2>
+  </a>
+</main>
+</body>
+</html>
